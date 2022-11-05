@@ -20,7 +20,7 @@ security:
   firewalls:
     main:
       lazy: true
-      providers: members
+      provider: members
       custom_authenticators:
         - Carguru\MemberBundle\Security\MemberFormAuthenticator
       logout:
