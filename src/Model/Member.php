@@ -2,6 +2,8 @@
 
 namespace Carguru\MemberBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -47,10 +49,22 @@ class Member implements MemberInterface, UserInterface, \Serializable, Equatable
      */
     private ?string $lastLoginIpAddress = null;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Profile", mappedBy="member", nullable=true, cascade={"persist", "remove"})
+     */
+    private ?Profile $profile;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="member", fetch="EXTRA_LAZY", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"position" = "ASC"})
+     */
+    private Collection $tasks;
+
     public function __construct(string $username, string $password)
     {
         $this->username = $username;
         $this->plainPassword = $password;
+        $this->task = new ArrayCollection();
     }
 
     public function isEqualTo(UserInterface $userInterface): bool
@@ -163,6 +177,22 @@ class Member implements MemberInterface, UserInterface, \Serializable, Equatable
     }
 
     /**
+     * @return Profile|null
+     */
+    public function getProfile(): ?Profile
+    {
+        return $this->profile;
+    }
+
+    /**
+     * @param Profile|null $profile
+     */
+    public function setProfile(?Profile $profile): void
+    {
+        $this->profile = $profile;
+    }
+
+    /**
      * Removes sensitive data from the user.
      * {@inheritdoc}
      */
@@ -174,5 +204,27 @@ class Member implements MemberInterface, UserInterface, \Serializable, Equatable
     public function getUserIdentifier(): string
     {
         return $this->username;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getTasks(): Collection
+    {
+        return $this->tasks;
+    }
+
+    public function addTask(Task $task): void
+    {
+        if (!$this->tasks->contains($task)) {
+            $this->tasks->add($task);
+        }
+    }
+
+    public function removeTask(Task $task): void
+    {
+        if ($this->tasks->contains($task)) {
+            $this->tasks->removeElement($task);
+        }
     }
 }
