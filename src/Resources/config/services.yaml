@@ -3,3 +3,11 @@ services:
     resource: '../../src/*'
     autowire: true
     autoconfigure: true
+
+  Carguru\MemberBundle\Doctrine\MemberPasswordSubscriber:
+    tags:
+      - { name: doctrine.event_subscriber }
+
+  Carguru\MemberBundle\EventListener\MemberLoginListener:
+    tags:
+      - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }

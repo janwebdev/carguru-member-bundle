@@ -17,7 +17,7 @@ class SecurityController extends AbstractController
      */
     public function login(Request $request, AuthenticationUtils $authenticationUtils): Response|RedirectResponse
     {
-        if($this->isGranted('IS_AUTHENTICATED_REMEMBERED') || $this->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED') || $this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('sonata_admin_dashboard');
         }
 
@@ -25,7 +25,7 @@ class SecurityController extends AbstractController
         $errors = $authenticationUtils->getLastAuthenticationError();
 
         $lastUsername = null;
-        if(!empty($errors)) {
+        if (!empty($errors)) {
             // last username entered by the user
             $lastUsername = $authenticationUtils->getLastUsername();
         }
