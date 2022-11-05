@@ -4,7 +4,7 @@ namespace Carguru\MemberBundle\Controller;
 
 use Carguru\MemberBundle\Form\MemberLoginForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
