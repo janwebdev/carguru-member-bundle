@@ -56,7 +56,7 @@ class Member implements MemberInterface, UserInterface, \Serializable, Equatable
 
     /**
      * @ORM\OneToMany(targetEntity="Task", mappedBy="member", fetch="EXTRA_LAZY", cascade={"persist", "remove"})
-     * @ORM\OrderBy({"position" = "ASC"})
+     * @ORM\OrderBy({"id" = "DESC"})
      */
     private Collection $tasks;
 
