@@ -1,6 +1,6 @@
 {
     "name": "janwebdev/carguru-member-bundle",
-    "description": "Make Entity translatable",
+    "description": "CarGuru Member Bundle",
     "keywords": ["symfony", "bundle", "carguru", "member", "admin", "php"],
     "type": "symfony-bundle",
     "homepage": "https://github.com/janwebdev/carguru-member-bundle",
