@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Doctrine\Listener;
+namespace Carguru\MemberBundle\Doctrine;
 
 use Carguru\MemberBundle\Model\MemberInterface;
 use Doctrine\Common\EventSubscriber;

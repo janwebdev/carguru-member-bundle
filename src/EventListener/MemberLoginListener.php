@@ -1,6 +1,6 @@
 <?php
 
-namespace App\EventListener;
+namespace Carguru\MemberBundle\EventListener;
 
 use Carguru\MemberBundle\Model\MemberInterface;
 use Doctrine\ORM\EntityManagerInterface;
