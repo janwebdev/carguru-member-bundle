@@ -50,7 +50,7 @@ class Member implements MemberInterface, UserInterface, \Serializable, Equatable
     private ?string $lastLoginIpAddress = null;
 
     /**
-     * @ORM\OneToOne(targetEntity="Profile", mappedBy="member", nullable=true, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Profile", mappedBy="member", cascade={"persist", "remove"})
      */
     private ?Profile $profile;
 
@@ -64,7 +64,7 @@ class Member implements MemberInterface, UserInterface, \Serializable, Equatable
     {
         $this->username = $username;
         $this->plainPassword = $password;
-        $this->task = new ArrayCollection();
+        $this->tasks = new ArrayCollection();
     }
 
     public function isEqualTo(UserInterface $userInterface): bool
