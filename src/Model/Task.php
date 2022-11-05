@@ -18,7 +18,7 @@ class Task
     private int $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Member", inversedBy="tasks")
+     * @ORM\ManyToOne(targetEntity="Member", inversedBy="tasks")
      * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
      */
     private Member $member;
