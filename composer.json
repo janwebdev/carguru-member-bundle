@@ -1,0 +1,66 @@
+{
+    "name": "janwebdev/carguru-member-bundle",
+    "description": "Make Entity translatable",
+    "keywords": ["symfony", "bundle", "carguru", "member", "admin", "php"],
+    "type": "symfony-bundle",
+    "homepage": "https://github.com/janwebdev/carguru-member-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jan Rogozinsky",
+            "email": "janwebdev@gmail.com",
+            "role": "PHP developer"
+        }
+    ],
+    "require":{
+        "php": "^7.4|^8.0|^8.1",
+        "symfony/config": "^4.4||^5.4||^6",
+        "symfony/dependency-injection": "^4.4||^5.4||^6",
+        "symfony/framework-bundle": "^4.4||^5.4||^6",
+        "symfony/security-bundle": "^4.4||^5.4||^6",
+        "symfony/form": "^4.4||^5.4||^6",
+        "symfony/twig-bundle": "^4.4||^5.4||^6",
+        "doctrine/orm": "^2.5"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest",
+        "symfony/test-pack": "*",
+        "phpunit/phpunit": "^9",
+        "phpro/grumphp": "^1.3",
+        "squizlabs/php_codesniffer": "^3.5",
+        "phpstan/phpstan": "^1.7.10"
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Carguru\\MemberBundle\\":  "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Carguru\\MemberBundle\\Tests\\":  "tests/"
+        }
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": "true",
+            "require": "^4.4"
+        },
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/grumphp run"
+    },
+    "config": {
+        "allow-plugins": {
+            "phpro/grumphp": true
+        }
+    },
+    "minimum-stability": "beta",
+    "prefer-stable": true
+}

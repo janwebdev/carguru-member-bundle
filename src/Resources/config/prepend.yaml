@@ -1,0 +1,35 @@
+doctrine:
+  orm:
+    mappings:
+      MemberBundle:
+        type: annotation
+        dir: '/Model'
+        is_bundle: true
+        prefix: Carguru\MemberBundle\Model
+#    resolve_target_entities:
+#      Carguru\MemberBundle\Model\MemberInterfaceInterface: Carguru\MemberBundle\Model\Member
+
+security:
+  providers:
+    members:
+      entity: { class: Carguru\MemberBundle\Model\Member, property: username }
+
+  access_decision_manager:
+    strategy: unanimous
+
+  firewalls:
+    main:
+      lazy: true
+      providers: members
+      custom_authenticators:
+        - Carguru\MemberBundle\Security\MemberFormAuthenticator
+      logout:
+        path: carguru_member_logout
+        target: carguru_member_login
+        invalidate_session: true
+      remember_me:
+        secret: '%kernel.secret%'
+        name: 'carguru_member_rememberme_cookie'
+        lifetime: '3600'
+        path: /admin
+        httponly: true

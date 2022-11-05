@@ -1,0 +1,5 @@
+services:
+  Carguru\MemberBundle\:
+    resource: '../../src/*'
+    autowire: true
+    autoconfigure: true
