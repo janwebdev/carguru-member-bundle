@@ -30,7 +30,7 @@ security:
       remember_me:
         secret: '%kernel.secret%'
         name: 'carguru_member_rememberme_cookie'
-        lifetime: '3600'
+        lifetime: 3600
         path: /admin
         httponly: true
 
