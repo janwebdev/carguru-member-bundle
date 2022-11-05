@@ -2,7 +2,7 @@
 
 namespace Carguru\MemberBundle\Model;
 
-use Doctrine\ORM\Mapping\Annotation as ORM;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;

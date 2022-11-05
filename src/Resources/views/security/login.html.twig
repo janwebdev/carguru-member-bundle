@@ -1,63 +1,62 @@
-{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+{% extends '@SonataAdmin/standard_layout.html.twig' %}
 
-{% block body %}
-    <!--begin::Signin-->
-    <div class="login-form login-signin">
-        <div class="text-center mb-10 mb-lg-20">
-            <h3 class="font-size-h1">Login to system</h3>
-            <p class="text-muted font-weight-bold">Fill in your Email and Password to sign in</p>
-            {#			<h1 class="kt-font-transform-u">enter the system</h1>#}
-            {#			<h6>Fill in your Email and Password to sign in</h6>#}
+{% block sonata_nav %}
+{% endblock sonata_nav %}
+
+{% block logo %}
+{% endblock logo %}
+
+{% block sonata_left_side %}
+{% endblock sonata_left_side %}
+
+{% block body_attributes %}class="sonata-bc login-page"{% endblock %}
+
+{% block sonata_wrapper %}
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="{{ path('sonata_admin_dashboard') }}">
+                <span>Login</span>
+            </a>
         </div>
-        {% if authError %}
-            <!--begin::Error-->
-            <div class="alert alert-custom alert-light-danger fade show mb-5" role="alert">
-                <div class="alert-icon"><i class="flaticon-warning"></i></div>
-                <div class="alert-text">{{ error.messageKey }}</div>
-                <div class="alert-close">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true"><i class="ki ki-close"></i></span>
-                    </button>
+        <div class="login-box-body">
+            {% block sonata_user_login_form %}
+                {% block sonata_user_login_error %}
+                    {% if error %}
+                        <div class="alert alert-danger">
+                            {{ error.messageKey|trans(error.messageData, 'security') }}
+                        </div>
+                    {% endif %}
+                {% endblock %}
+                {% for label, flashes in app.session.flashbag.all %}
+                    {% for flash in flashes %}
+                        <div class="alert alert-{{ label }}">
+                            {{ flash }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                <p class="login-box-msg">{{ 'Authentication'|trans }}</p>
+                {{ form_start(form, {'method':'post','action': path('carguru_member_login'),'attr': {'class': 'form','autocomplete': 'off','novalidate':'novalidate', 'id':'kt_login_signin_form'}}) }}
+                <div class="form-group">
+                    {{ form_widget(form._username, { 'attr': {'class': 'form-control form-control-solid h-auto py-5 px-6', 'placeholder': 'Username', 'autocomplete':'off'}}) }}
                 </div>
-            </div>
-            <!--end::Error-->
-        {% endif %}
-        {% for message in app.flashes('success') %}
-            <!--begin::Notice-->
-            <div class="alert alert-custom alert-light-success fade show mb-5" role="alert">
-                <div class="alert-icon"><i class="flaticon-safe-shield-protection"></i></div>
-                <div class="alert-text">{{ message }}</div>
-                <div class="alert-close">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true"><i class="ki ki-close"></i></span>
-                    </button>
+                <div class="form-group">
+                    {{ form_widget(form._password, {'attr': {'class': 'form-control form-control-solid h-auto py-5 px-6', 'placeholder': 'Password','autocomplete':'off'}}) }}
                 </div>
-            </div>
-            <!--end::Notice-->
-        {% endfor %}
-        <!--begin::Form-->
-        {{ form_start(form, {'method':'post','action': path('carguru_member_login'),'attr': {'class': 'form','autocomplete': 'off','novalidate':'novalidate', 'id':'kt_login_signin_form'}}) }}
-        <div class="form-group">
-            {{ form_widget(form._username, { 'attr': {'class': 'form-control form-control-solid h-auto py-5 px-6', 'placeholder': 'Username', 'autocomplete':'off'}}) }}
+                <div class="form-group d-flex flex-wrap justify-content-between align-items-center">
+                    <div class="checkbox-inline">
+                        <label class="checkbox checkbox-primary m-0">
+                            <input type="checkbox" name="_remember_me" />
+                            <span></span>Keep me logged in</label>
+                    </div>
+                </div>
+                <!--begin::Action-->
+                <div class="form-group text-center mt-10">
+                    <button id="kt_login_signin_submit" class="btn btn-primary px-15 py-3"><i class="fa fa-sign-in-alt"></i> Connect</button>
+                </div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <!--end::Action-->
+                {{ form_end(form) }}
+            {% endblock %}
         </div>
-        <div class="form-group">
-            {{ form_widget(form._password, {'attr': {'class': 'form-control form-control-solid h-auto py-5 px-6', 'placeholder': 'Password','autocomplete':'off'}}) }}
-        </div>
-        <div class="form-group d-flex flex-wrap justify-content-between align-items-center">
-            <div class="checkbox-inline">
-                <label class="checkbox checkbox-primary m-0">
-                    <input type="checkbox" name="_remember_me" />
-                    <span></span>Keep me logged in</label>
-            </div>
-        </div>
-        <!--begin::Action-->
-        <div class="form-group text-center mt-10">
-            <button id="kt_login_signin_submit" class="btn btn-primary px-15 py-3"><i class="fa fa-sign-in-alt"></i> Connect</button>
-        </div>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        <!--end::Action-->
-        {{ form_end(form) }}
-        <!--end::Form-->
     </div>
-    <!--end::Signin-->
-{% endblock %}
+{% endblock sonata_wrapper %}

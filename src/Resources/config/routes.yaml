@@ -1,3 +1,3 @@
 member_bundle_controllers:
-  resource: ../../Controllers/
+  resource: ../../Controller/
   type: annotation

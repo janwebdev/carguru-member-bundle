@@ -22,10 +22,10 @@ class SecurityController extends AbstractController
         }
 
         // get the login error if there is one
-        $errors = $authenticationUtils->getLastAuthenticationError();
+        $error = $authenticationUtils->getLastAuthenticationError();
 
         $lastUsername = null;
-        if (!empty($errors)) {
+        if (!empty($error)) {
             // last username entered by the user
             $lastUsername = $authenticationUtils->getLastUsername();
         }
@@ -36,7 +36,7 @@ class SecurityController extends AbstractController
 
         return $this->renderForm(
             '@CarguruMember/security/login.html.twig',
-            ['errors' => $errors, 'form' => $form]
+            ['error' => $error, 'form' => $form]
         );
     }
 

@@ -1,13 +1,11 @@
 doctrine:
   orm:
     mappings:
-      MemberBundle:
+      CarguruMemberBundle:
         type: annotation
         dir: '/Model'
         is_bundle: true
         prefix: Carguru\MemberBundle\Model
-#    resolve_target_entities:
-#      Carguru\MemberBundle\Model\MemberInterfaceInterface: Carguru\MemberBundle\Model\Member
 
 security:
   providers:
@@ -18,7 +16,8 @@ security:
     strategy: unanimous
 
   firewalls:
-    main:
+    admin:
+      pattern: /admin(.*)
       lazy: true
       provider: members
       custom_authenticators:
@@ -37,3 +36,5 @@ security:
   role_hierarchy:
     ROLE_ADMIN: [ ROLE_USER, ROLE_SONATA_ADMIN ]
     ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
+    SONATA:
+      - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT

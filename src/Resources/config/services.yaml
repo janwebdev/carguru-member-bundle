@@ -5,9 +5,14 @@ services:
     autoconfigure: true
 
   Carguru\MemberBundle\Doctrine\MemberPasswordSubscriber:
+    arguments:
+      - '@security.password_hasher'
     tags:
       - { name: doctrine.event_subscriber }
 
   Carguru\MemberBundle\EventListener\MemberLoginListener:
+    arguments:
+      - '@request_stack'
+      - '@doctrine.orm.entity_manager'
     tags:
       - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
